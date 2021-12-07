@@ -1,36 +1,42 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "moonmc",
   "version": "${version}",
-  "name": "The name of the mod",
-  "description": "Describe your mod here",
+  "name": "MoonMC",
+  "description": "Minecraft but I'm on the moon",
   "authors": [
-    "Your name"
+    "isXander"
   ],
   "contact": {
-    "homepage": "https://example.com",
-    "issues": "https://github.com/example/example/issues",
-    "sources": "https://github.com/example/example"
+    "homepage": "https://www.isxander.dev",
+    "issues": "https://github.com/isXander/MoonMC/issues",
+    "sources": "https://github.com/isXander/MoonMC"
   },
-  "license": "The Unlicense",
-  "icon": "assets/modid/icon.png",
+  "license": "ARR",
   "environment": "*",
   "entrypoints": {
     "main": [
       {
         "adapter": "kotlin",
-        "value": "com.author.modid.ModName"
+        "value": "dev.isxander.moonmc.MoonMod"
+      }
+    ],
+    "kambrik": [
+      {
+        "adapter": "kotlin",
+        "value": "dev.isxander.moonmc.registry.MoonRegistry"
       }
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "moonmc.mixins.json"
   ],
   "depends": {
     "fabric": "*",
     "fabricloader": ">=0.12.0",
     "fabric-language-kotlin": ">=1.7.0+kotlin.1.6.0",
     "minecraft": "1.18.x",
-    "java": ">=17"
+    "java": ">=17",
+    "kambrik": ">=3.0.0"
   }
 }
