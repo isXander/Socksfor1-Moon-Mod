@@ -3,6 +3,8 @@ plugins {
 
     kotlin("jvm") version kotlinVersion
     id("fabric-loom") version "0.10.+"
+
+    java
 }
 
 group = "dev.isxander"

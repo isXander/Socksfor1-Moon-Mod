@@ -5,5 +5,12 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "mixins": []
+  "mixins": [
+    "lowgravity.AccessorEntity",
+    "lowgravity.MixinEntity",
+    "lowgravity.MixinLivingEntity",
+    "noleaves.MixinFoliagePlacer",
+    "oxygen.MixinInGameHud",
+    "oxygen.MixinLivingEntity",
+  ]
 }
