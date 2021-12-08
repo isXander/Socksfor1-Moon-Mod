@@ -23,7 +23,7 @@ fun LivingEntity.updateOxygen() {
     ) {
         -1
     } else {
-        1
+        40
     }
 
     if (oxygen == 0) {

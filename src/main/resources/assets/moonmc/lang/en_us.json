@@ -1,5 +1,6 @@
 {
   "itemGroup.moonmc.moon_item_group": "MoonMC",
   "item.moonmc.oxygen_mask": "Oxygen Mask",
+  "item.moonmc.laser_sword": "Laser Sword",
   "death.attack.ranOutOfOxygen": "%1$s slowly died due to lack of oxygen."
 }
