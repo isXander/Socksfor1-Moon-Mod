@@ -6,7 +6,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.util.math.BlockPos
 
-const val MAX_OXYGEN = 200
+const val MAX_OXYGEN = 12_000
 
 var LivingEntity.oxygen: Int
     get() = (this as LivingEntityOxygenAccess).oxygen

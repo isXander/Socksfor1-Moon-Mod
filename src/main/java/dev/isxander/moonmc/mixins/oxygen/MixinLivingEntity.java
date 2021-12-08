@@ -21,7 +21,6 @@ public abstract class MixinLivingEntity implements LivingEntityOxygenAccess {
     @Shadow public abstract void equipStack(EquipmentSlot var1, ItemStack var2);
 
     private int oxygen = LivingEntityExtKt.MAX_OXYGEN;
-    private boolean firstTick = true;
 
     @Override public int getOxygen() { return oxygen; }
     @Override public void setOxygen(int oxygen) { this.oxygen = oxygen; }
@@ -30,14 +29,6 @@ public abstract class MixinLivingEntity implements LivingEntityOxygenAccess {
     public void updateOxygenTick(CallbackInfo ci) {
         if (this.isAlive()) {
             LivingEntityExtKt.updateOxygen((LivingEntity) (Object) this);
-        }
-    }
-
-    @Inject(method = "baseTick", at = @At("HEAD"))
-    public void giveOxygenMask(CallbackInfo ci) {
-        if (firstTick) {
-            equipStack(EquipmentSlot.HEAD, new ItemStack(MoonRegistry.INSTANCE.getOXYGEN_MASK()));
-            firstTick = false;
         }
     }
 }

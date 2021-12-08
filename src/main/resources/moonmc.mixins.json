@@ -12,5 +12,6 @@
     "noleaves.MixinFoliagePlacer",
     "oxygen.MixinInGameHud",
     "oxygen.MixinLivingEntity",
+    "oxygen.MixinMobEntity"
   ]
 }
