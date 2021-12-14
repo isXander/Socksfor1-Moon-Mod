@@ -1,4 +1,4 @@
-package dev.isxander.moonmc.mixins.noleaves;
+package dev.isxander.moonmc.mixins.nofoliage;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

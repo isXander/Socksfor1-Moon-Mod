@@ -13,7 +13,12 @@
     "moonlight.MixinDimensionType",
     "moonlight.MixinGameRules",
     "moonlight.MixinLevelProperties",
-    "noleaves.MixinFoliagePlacer",
+    "noclouds.MixinGameOptions",
+    "nofoliage.MixinDefaultBiomeFeatures",
+    "nofoliage.MixinFoliagePlacer",
+    "nowater.MixinAquiferSampler",
+    "nowater.MixinAquiferSamplerImpl",
+    "nowater.MixinWorld",
     "oxygen.MixinInGameHud",
     "oxygen.MixinLivingEntity",
     "oxygen.MixinMobEntity"

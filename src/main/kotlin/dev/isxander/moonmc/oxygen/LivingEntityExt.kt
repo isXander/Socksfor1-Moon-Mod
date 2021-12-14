@@ -3,7 +3,10 @@ package dev.isxander.moonmc.oxygen
 import net.minecraft.block.Blocks
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.math.BlockPos
 
 const val MAX_OXYGEN = 12_000
@@ -20,10 +23,16 @@ fun LivingEntity.updateOxygen() {
         !isWearingOxygenMask
         && !world.getBlockState(BlockPos(x, eyeY, z)).isOf(Blocks.BUBBLE_COLUMN)
         && this !is WaterCreatureEntity
+        && !this.isInvulnerable
     ) {
         -1
     } else {
         40
+    }
+
+    if (oxygen <= 1000) {
+        val amplifier = (((oxygen - 11_000) / 200) + 1).coerceAtMost(4)
+        this.addStatusEffect(StatusEffectInstance(StatusEffects.BLINDNESS, 20, amplifier))
     }
 
     if (oxygen == 0) {
