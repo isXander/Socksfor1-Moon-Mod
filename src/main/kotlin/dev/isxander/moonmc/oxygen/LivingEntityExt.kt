@@ -8,6 +8,7 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.mob.WaterCreatureEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.math.BlockPos
+import kotlin.math.ceil
 
 const val MAX_OXYGEN = 12_000
 
@@ -24,18 +25,16 @@ fun LivingEntity.updateOxygen() {
         && !world.getBlockState(BlockPos(x, eyeY, z)).isOf(Blocks.BUBBLE_COLUMN)
         && this !is WaterCreatureEntity
         && !this.isInvulnerable
+        && (this as? PlayerEntity)?.isCreative == false
     ) {
-        -1
+        -10
     } else {
         40
     }
 
-    if (oxygen <= 1000) {
-        val amplifier = (((oxygen - 11_000) / 200) + 1).coerceAtMost(4)
-        this.addStatusEffect(StatusEffectInstance(StatusEffects.BLINDNESS, 20, amplifier))
-    }
-
-    if (oxygen == 0) {
-        damage(OxygenDamageSource, 0.5f)
+    if (oxygen <= 3000) {
+        val amplifier = 3 - (oxygen / 1000f).coerceIn(0f..3f)
+        this.addStatusEffect(StatusEffectInstance(StatusEffects.BLINDNESS, 100, ceil(amplifier).toInt(), true, false, false))
+        damage(OxygenDamageSource, amplifier)
     }
 }

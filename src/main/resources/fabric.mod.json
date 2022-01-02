@@ -21,6 +21,12 @@
         "value": "dev.isxander.moonmc.MoonMod"
       }
     ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "dev.isxander.moonmc.client.MoonClientMod"
+      }
+    ],
     "kambrik": [
       {
         "adapter": "kotlin",

@@ -8,6 +8,6 @@ object MoonMod : ModInitializer {
     const val gravityMultiplier = 0.25
 
     override fun onInitialize() {
-        MinecraftClient.getInstance().options
+
     }
 }

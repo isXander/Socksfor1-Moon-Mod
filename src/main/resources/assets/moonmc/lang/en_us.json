@@ -2,5 +2,12 @@
   "itemGroup.moonmc.moon_item_group": "MoonMC",
   "item.moonmc.oxygen_mask": "Oxygen Mask",
   "item.moonmc.laser_sword": "Laser Sword",
-  "death.attack.ranOutOfOxygen": "%1$s slowly died due to lack of oxygen."
+  "item.moonmc.laser_shotgun": "Laser Shotgun",
+  "item.moonmc.moon_rock": "Moon Rock",
+  "item.moonmc.moon_man_spawn_egg": "Moon Man Spawn Egg",
+  "death.attack.ranOutOfOxygen": "%1$s slowly died due to lack of oxygen.",
+  "death.attack.ranOutOfOxygen.player": "%1$s slowly died due to lack of oxygen.",
+  "entity.moonmc.shotgun_shell": "Shotgun Shell",
+  "entity.moonmc.moon_rock": "Moon Rock",
+  "entity.moonmc.moon_man": "Moon Man"
 }
