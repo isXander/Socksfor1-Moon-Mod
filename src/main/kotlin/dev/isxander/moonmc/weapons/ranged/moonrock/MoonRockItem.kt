@@ -1,6 +1,7 @@
-package dev.isxander.moonmc.weapons.ranged
+package dev.isxander.moonmc.weapons.ranged.moonrock
 
 import dev.isxander.moonmc.registry.MoonRegistry
+import dev.isxander.moonmc.weapons.ranged.moonrock.MoonRockEntity
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -16,7 +17,7 @@ class MoonRockItem : Item(FabricItemSettings().maxCount(16).group(MoonRegistry.M
         val stack = user.getStackInHand(hand)
         if (!world.isClient) {
             val entity = MoonRegistry.MOON_ROCK_ENTITY.create(world) ?: return TypedActionResult.fail(stack)
-            entity.setPosition(user.pos)
+            entity.setPosition(user.eyePos)
             entity.owner = user
             entity.setItem(stack)
             entity.setVelocity(user, user.pitch, user.yaw, 0.0f, 1f, 1f)

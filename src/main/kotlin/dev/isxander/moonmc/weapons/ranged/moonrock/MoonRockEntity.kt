@@ -1,8 +1,7 @@
-package dev.isxander.moonmc.weapons.ranged
+package dev.isxander.moonmc.weapons.ranged.moonrock
 
 import dev.isxander.moonmc.registry.MoonRegistry
 import dev.isxander.moonmc.utils.EntitySpawnPacket
-import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity
@@ -18,7 +17,7 @@ class MoonRockEntity(type: EntityType<out MoonRockEntity>, world: World) : Throw
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
         val entity = entityHitResult.entity
-        entity.damage(DamageSource.thrownProjectile(this, entity), 10f)
+        entity.damage(DamageSource.thrownProjectile(this, owner), 10f)
     }
 
     override fun onCollision(hitResult: HitResult) {

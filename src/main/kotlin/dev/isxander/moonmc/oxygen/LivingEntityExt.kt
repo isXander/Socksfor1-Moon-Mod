@@ -27,7 +27,7 @@ fun LivingEntity.updateOxygen() {
         && !this.isInvulnerable
         && (this as? PlayerEntity)?.isCreative == false
     ) {
-        -10
+        -1
     } else {
         40
     }

@@ -6,6 +6,7 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "events.MixinServerWorld",
     "lowgravity.AccessorEntity",
     "lowgravity.MixinEntity",
     "lowgravity.MixinLivingEntity",

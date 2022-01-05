@@ -25,5 +25,23 @@ public abstract class MixinGameRules {
     private static GameRules.Type<GameRules.BooleanRule> disableDaylightCycle(GameRules.Type<GameRules.BooleanRule> currentRule) {
         return AccessorBooleanRule.create(false);
     }
+
+    @ModifyArg(
+        method = "<clinit>",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/GameRules;register(Ljava/lang/String;Lnet/minecraft/world/GameRules$Category;Lnet/minecraft/world/GameRules$Type;)Lnet/minecraft/world/GameRules$Key;",
+            ordinal = 0
+        ),
+        slice = @Slice(
+            from = @At(
+                value = "CONSTANT",
+                args = "stringValue=doWeatherCycle"
+            )
+        )
+    )
+    private static GameRules.Type<GameRules.BooleanRule> disableWeatherCycle(GameRules.Type<GameRules.BooleanRule> currentRule) {
+        return AccessorBooleanRule.create(false);
+    }
 }
 

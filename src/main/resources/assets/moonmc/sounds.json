@@ -1,0 +1,17 @@
+{
+  "entity.asteroid.ambient": {
+    "sounds": [
+      "moonmc:entity.asteroid.ambient"
+    ]
+  },
+  "item.laser_gun.shoot": {
+    "sounds": [
+      "moonmc:item.laser_gun.shoot"
+    ]
+  },
+  "entity.bullet.hit": {
+    "sounds": [
+      "moonmc:entity.bullet.hit"
+    ]
+  }
+}

@@ -29,8 +29,7 @@ public abstract class MixinEntity {
 
     @Shadow public abstract Vec3d getRotationVector();
 
-    @Shadow
-    public float fallDistance;
+    @Shadow public float fallDistance;
 
     @Shadow public abstract boolean hasNoGravity();
 

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "moonmc:item/red_asteroid_shard"
+  }
+}
