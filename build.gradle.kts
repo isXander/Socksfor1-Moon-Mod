@@ -16,7 +16,6 @@ java {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
 }
@@ -29,6 +28,7 @@ dependencies {
     val fabricVersion: String by project
     val fabricKotlinVersion: String by project
     val kambrikVersion: String by project
+    val geckolibVersion: String by project
 
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
 
@@ -38,7 +38,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
     modImplementation("net.fabricmc:fabric-language-kotlin:$fabricKotlinVersion")
     modImplementation("io.ejekta:kambrik:$kambrikVersion")
-    modImplementation("software.bernie.geckolib:geckolib-fabric-1.18:3.0.+")
+    modImplementation("software.bernie.geckolib:geckolib-fabric-1.18:$geckolibVersion")
     modImplementation(files("libs/manhunt.jar"))
 }
 

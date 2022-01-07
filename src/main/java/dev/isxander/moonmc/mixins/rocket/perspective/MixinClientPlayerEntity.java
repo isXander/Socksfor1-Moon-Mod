@@ -1,4 +1,4 @@
-package dev.isxander.moonmc.mixins.rocketperspective;
+package dev.isxander.moonmc.mixins.rocket.perspective;
 
 import dev.isxander.moonmc.transport.rocket.RocketEntity;
 import net.minecraft.client.MinecraftClient;

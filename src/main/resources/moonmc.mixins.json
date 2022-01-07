@@ -23,7 +23,8 @@
     "oxygen.MixinInGameHud",
     "oxygen.MixinLivingEntity",
     "oxygen.MixinMobEntity",
-    "rocketperspective.MixinClientPlayerEntity",
-    "rocketperspective.MixinMinecraftClient"
+    "rocket.input.MixinClientPlayerEntity",
+    "rocket.perspective.MixinClientPlayerEntity",
+    "rocket.perspective.MixinMinecraftClient"
   ]
 }

@@ -24,14 +24,18 @@ class RocketEntity(type: EntityType<out RocketEntity>, world: World) : Entity(ty
 
     override fun tick() {
         super.tick()
-        if (world.isClient) {
-            refreshPosition()
-            setRotation(yaw, pitch)
-            return
+        if (isLogicalSideForUpdatingMovement) {
+            if (world.isClient) {
+                refreshPosition()
+                setRotation(yaw, pitch)
+                return
+            }
+            addVelocity(0.0, -0.1, 0.0)
+            move(MovementType.SELF, velocity)
         }
-        addVelocity(0.0, -0.1, 0.0)
-        move(MovementType.SELF, velocity)
     }
+
+
 
     override fun interact(player: PlayerEntity, hand: Hand): ActionResult {
         if (hasPassengers() || player.shouldCancelInteraction()) return ActionResult.PASS
@@ -43,7 +47,7 @@ class RocketEntity(type: EntityType<out RocketEntity>, world: World) : Entity(ty
 
     override fun getPrimaryPassenger() = passengerList.firstOrNull()
     override fun canAddPassenger(passenger: Entity) = passengerList.size <= 0
-    override fun getMountedHeightOffset() = 2.0
+    override fun getMountedHeightOffset() = 5.0
 
     override fun damage(source: DamageSource, amount: Float): Boolean {
         if (isInvulnerableTo(source)) return false

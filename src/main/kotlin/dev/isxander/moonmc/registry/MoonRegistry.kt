@@ -123,7 +123,7 @@ object MoonRegistry : KambrikAutoRegistrar {
     val LASER_GUN_SHOOT_SOUND = "item.laser_gun.shoot" forSoundEvent SoundEvent(Identifier("moonmc", "item.laser_gun.shoot"))
     val BULLET_HIT_SOUND = "entity.bullet.hit" forSoundEvent SoundEvent(Identifier("moonmc", "entity.bullet.hit"))
 
-    val LASER_PARTICLE = FabricParticleTypes.simple()
+    val LASER_PARTICLE = "laser_particle" forParticle FabricParticleTypes.simple()
 
     val ROCKET_ENTITY = "rocket" forEntityType FabricEntityTypeBuilder.create<RocketEntity>().apply {
         entityFactory(::RocketEntity)
@@ -132,9 +132,7 @@ object MoonRegistry : KambrikAutoRegistrar {
         dimensions(EntityDimensions.fixed(3f, 7.5f))
     }.build()
 
-    override fun manualRegister() {
-        Registry.register(Registry.PARTICLE_TYPE, Identifier("moonmc", "laser_particle"), LASER_PARTICLE)
-
+    override fun afterRegistration() {
         BiomeModifications.addSpawn({ it.biome.category != Biome.Category.NETHER && it.biome.category != Biome.Category.THEEND && it.biome.category != Biome.Category.NONE }, SpawnGroup.MONSTER, MOON_MAN_ENTITY, 100, 1, 2)
         SpawnRestrictionAccessor.callRegister(MOON_MAN_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnIgnoreLightLevel)
     }
