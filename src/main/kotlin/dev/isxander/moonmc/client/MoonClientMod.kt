@@ -6,6 +6,7 @@ import dev.isxander.moonmc.oxygen.MAX_OXYGEN
 import dev.isxander.moonmc.oxygen.oxygen
 import dev.isxander.moonmc.oxygen.render.OxygenMaskRenderer
 import dev.isxander.moonmc.registry.MoonRegistry
+import dev.isxander.moonmc.transport.rocket.render.RocketEntityRenderer
 import dev.isxander.moonmc.utils.EntitySpawnPacket
 import dev.isxander.moonmc.utils.EntitySpawnPacket.PacketBufUtil.readAngle
 import dev.isxander.moonmc.utils.EntitySpawnPacket.PacketBufUtil.readVec3d
@@ -39,6 +40,7 @@ object MoonClientMod : ClientModInitializer {
         EntityRendererRegistry.register(MoonRegistry.MOON_ROCK_ENTITY, ::FlyingItemEntityRenderer)
         EntityRendererRegistry.register(MoonRegistry.MOON_MAN_ENTITY, ::MoonManEntityRenderer)
         EntityRendererRegistry.register(MoonRegistry.ASTEROID_ENTITY, ::AsteroidRenderer)
+        EntityRendererRegistry.register(MoonRegistry.ROCKET_ENTITY, ::RocketEntityRenderer)
 
         GeoArmorRenderer.registerArmorRenderer<Entity>(OxygenMaskRenderer(), MoonRegistry.OXYGEN_MASK)
 

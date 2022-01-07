@@ -4,6 +4,7 @@ import dev.isxander.moonmc.disasters.asteroid.AsteroidEntity
 import dev.isxander.moonmc.food.AsteroidShardItem
 import dev.isxander.moonmc.monsters.MoonManEntity
 import dev.isxander.moonmc.oxygen.OxygenMask
+import dev.isxander.moonmc.transport.rocket.RocketEntity
 import dev.isxander.moonmc.weapons.melee.LaserSwordItem
 import dev.isxander.moonmc.weapons.ranged.bazooka.BazookaRocketEntity
 import dev.isxander.moonmc.weapons.ranged.bazooka.LaserBazookaItem
@@ -19,16 +20,25 @@ import dev.isxander.moonmc.weapons.ranged.sniper.LaserSniperItem
 import dev.isxander.moonmc.weapons.ranged.sniper.SniperBulletEntity
 import io.ejekta.kambrik.registration.KambrikAutoRegistrar
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
+import net.fabricmc.fabric.api.biome.v1.BiomeModification
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes
+import net.fabricmc.fabric.mixin.`object`.builder.SpawnRestrictionAccessor
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.SpawnGroup
+import net.minecraft.entity.SpawnRestriction
+import net.minecraft.entity.mob.HostileEntity
+import net.minecraft.entity.passive.PigEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.Heightmap
+import net.minecraft.world.SpawnHelper
+import net.minecraft.world.biome.Biome
 
 object MoonRegistry : KambrikAutoRegistrar {
     val MOON_ITEM_GROUP = FabricItemGroupBuilder.create(Identifier("moonmc", "moon_item_group"))
@@ -100,7 +110,7 @@ object MoonRegistry : KambrikAutoRegistrar {
     val ASTEROID_ENTITY = "asteroid" forEntityType FabricEntityTypeBuilder.create<AsteroidEntity>().apply {
         entityFactory(::AsteroidEntity)
         spawnGroup(SpawnGroup.MISC)
-        trackRangeChunks(8)
+        trackRangeChunks(20)
         trackedUpdateRate(10)
         dimensions(EntityDimensions.fixed(10f, 10f))
     }.build()
@@ -115,7 +125,17 @@ object MoonRegistry : KambrikAutoRegistrar {
 
     val LASER_PARTICLE = FabricParticleTypes.simple()
 
+    val ROCKET_ENTITY = "rocket" forEntityType FabricEntityTypeBuilder.create<RocketEntity>().apply {
+        entityFactory(::RocketEntity)
+        spawnGroup(SpawnGroup.MISC)
+        trackRangeChunks(8)
+        dimensions(EntityDimensions.fixed(3f, 7.5f))
+    }.build()
+
     override fun manualRegister() {
         Registry.register(Registry.PARTICLE_TYPE, Identifier("moonmc", "laser_particle"), LASER_PARTICLE)
+
+        BiomeModifications.addSpawn({ it.biome.category != Biome.Category.NETHER && it.biome.category != Biome.Category.THEEND && it.biome.category != Biome.Category.NONE }, SpawnGroup.MONSTER, MOON_MAN_ENTITY, 100, 1, 2)
+        SpawnRestrictionAccessor.callRegister(MOON_MAN_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnIgnoreLightLevel)
     }
 }

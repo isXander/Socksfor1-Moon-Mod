@@ -22,6 +22,8 @@
     "nowater.MixinWorld",
     "oxygen.MixinInGameHud",
     "oxygen.MixinLivingEntity",
-    "oxygen.MixinMobEntity"
+    "oxygen.MixinMobEntity",
+    "rocketperspective.MixinClientPlayerEntity",
+    "rocketperspective.MixinMinecraftClient"
   ]
 }
