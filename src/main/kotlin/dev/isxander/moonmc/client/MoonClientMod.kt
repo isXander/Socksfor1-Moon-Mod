@@ -7,6 +7,7 @@ import dev.isxander.moonmc.oxygen.oxygen
 import dev.isxander.moonmc.oxygen.render.OxygenMaskRenderer
 import dev.isxander.moonmc.registry.MoonRegistry
 import dev.isxander.moonmc.transport.rocket.render.RocketEntityRenderer
+import dev.isxander.moonmc.transport.rocket.render.RocketItemRenderer
 import dev.isxander.moonmc.utils.EntitySpawnPacket
 import dev.isxander.moonmc.utils.EntitySpawnPacket.PacketBufUtil.readAngle
 import dev.isxander.moonmc.utils.EntitySpawnPacket.PacketBufUtil.readVec3d
@@ -29,6 +30,7 @@ import net.minecraft.screen.PlayerScreenHandler
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer
+import software.bernie.geckolib3.renderers.geo.GeoItemRenderer
 
 object MoonClientMod : ClientModInitializer {
     override fun onInitializeClient() {
@@ -41,7 +43,7 @@ object MoonClientMod : ClientModInitializer {
         EntityRendererRegistry.register(MoonRegistry.MOON_MAN_ENTITY, ::MoonManEntityRenderer)
         EntityRendererRegistry.register(MoonRegistry.ASTEROID_ENTITY, ::AsteroidRenderer)
         EntityRendererRegistry.register(MoonRegistry.ROCKET_ENTITY, ::RocketEntityRenderer)
-
+        GeoItemRenderer.registerItemRenderer(MoonRegistry.ROCKET_ITEM, RocketItemRenderer())
         GeoArmorRenderer.registerArmorRenderer<Entity>(OxygenMaskRenderer(), MoonRegistry.OXYGEN_MASK)
 
         receiveEntityPacket()

@@ -24,6 +24,7 @@
     "oxygen.MixinLivingEntity",
     "oxygen.MixinMobEntity",
     "rocket.input.MixinClientPlayerEntity",
+    "rocket.input.MixinEntity",
     "rocket.perspective.MixinClientPlayerEntity",
     "rocket.perspective.MixinMinecraftClient"
   ]

@@ -5,6 +5,7 @@ import dev.isxander.moonmc.food.AsteroidShardItem
 import dev.isxander.moonmc.monsters.MoonManEntity
 import dev.isxander.moonmc.oxygen.OxygenMask
 import dev.isxander.moonmc.transport.rocket.RocketEntity
+import dev.isxander.moonmc.transport.rocket.RocketItem
 import dev.isxander.moonmc.weapons.melee.LaserSwordItem
 import dev.isxander.moonmc.weapons.ranged.bazooka.BazookaRocketEntity
 import dev.isxander.moonmc.weapons.ranged.bazooka.LaserBazookaItem
@@ -123,7 +124,7 @@ object MoonRegistry : KambrikAutoRegistrar {
     val LASER_GUN_SHOOT_SOUND = "item.laser_gun.shoot" forSoundEvent SoundEvent(Identifier("moonmc", "item.laser_gun.shoot"))
     val BULLET_HIT_SOUND = "entity.bullet.hit" forSoundEvent SoundEvent(Identifier("moonmc", "entity.bullet.hit"))
 
-    val LASER_PARTICLE = "laser_particle" forParticle FabricParticleTypes.simple()
+    val LASER_PARTICLE = FabricParticleTypes.simple()
 
     val ROCKET_ENTITY = "rocket" forEntityType FabricEntityTypeBuilder.create<RocketEntity>().apply {
         entityFactory(::RocketEntity)
@@ -131,8 +132,11 @@ object MoonRegistry : KambrikAutoRegistrar {
         trackRangeChunks(8)
         dimensions(EntityDimensions.fixed(3f, 7.5f))
     }.build()
+    val ROCKET_ITEM = "rocket" forItem RocketItem()
 
     override fun afterRegistration() {
+        Registry.register(Registry.PARTICLE_TYPE, Identifier("moonmc", "laser_particle"), LASER_PARTICLE)
+
         BiomeModifications.addSpawn({ it.biome.category != Biome.Category.NETHER && it.biome.category != Biome.Category.THEEND && it.biome.category != Biome.Category.NONE }, SpawnGroup.MONSTER, MOON_MAN_ENTITY, 100, 1, 2)
         SpawnRestrictionAccessor.callRegister(MOON_MAN_ENTITY, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnIgnoreLightLevel)
     }

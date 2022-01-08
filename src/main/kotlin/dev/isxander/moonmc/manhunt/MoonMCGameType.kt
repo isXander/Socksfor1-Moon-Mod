@@ -23,6 +23,9 @@ object MoonMCGameType : ManhuntGameType {
         { it.speedrunner.giveItemStack(ItemStack(MoonRegistry.LASER_SHOTGUN)) },
         { it.speedrunner.giveItemStack(ItemStack(MoonRegistry.LASER_RIFLE)) },
         { it.speedrunner.giveItemStack(ItemStack(MoonRegistry.LASER_SNIPER)) },
-        { it.speedrunner.giveItemStack(ItemStack(MoonRegistry.LASER_BAZOOKA)) },
+        {
+            it.speedrunner.giveItemStack(ItemStack(MoonRegistry.LASER_BAZOOKA))
+            it.speedrunner.giveItemStack(ItemStack(MoonRegistry.ROCKET_ITEM))
+        },
     )
 }

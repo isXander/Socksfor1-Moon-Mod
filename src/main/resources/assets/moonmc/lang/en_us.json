@@ -12,10 +12,12 @@
   "item.moonmc.blue_asteroid_shard": "Blue Asteroid Shard",
   "item.moonmc.red_asteroid_shard": "Red Asteroid Shard",
   "item.moonmc.yellow_asteroid_shard": "Yellow Asteroid Shard",
-  "death.attack.ranOutOfOxygen": "%1$s slowly died due to lack of oxygen.",
-  "death.attack.ranOutOfOxygen.player": "%1$s slowly died due to lack of oxygen.",
+  "item.moonmc.rocket": "Rocket Ship",
+  "entity.moonmc.rocket": "Rocket Ship",
   "entity.moonmc.shotgun_shell": "Shotgun Shell",
   "entity.moonmc.pistol_bullet": "Pistol Bullet",
   "entity.moonmc.moon_rock": "Moon Rock",
-  "entity.moonmc.moon_man": "Moon Man"
+  "entity.moonmc.moon_man": "Moon Man",
+  "death.attack.ranOutOfOxygen": "%1$s slowly died due to lack of oxygen.",
+  "death.attack.ranOutOfOxygen.player": "%1$s slowly died due to lack of oxygen."
 }
