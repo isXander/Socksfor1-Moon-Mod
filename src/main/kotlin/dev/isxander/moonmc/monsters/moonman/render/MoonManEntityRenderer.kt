@@ -1,7 +1,7 @@
-package dev.isxander.moonmc.monsters.render
+package dev.isxander.moonmc.monsters.moonman.render
 
-import dev.isxander.moonmc.monsters.MoonManEntity
-import dev.isxander.moonmc.monsters.model.MoonManEntityModel
+import dev.isxander.moonmc.monsters.moonman.MoonManEntity
+import dev.isxander.moonmc.monsters.moonman.model.MoonManEntityModel
 import net.minecraft.client.render.entity.BipedEntityRenderer
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer

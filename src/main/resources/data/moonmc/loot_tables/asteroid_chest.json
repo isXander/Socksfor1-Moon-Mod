@@ -91,7 +91,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:stone",
+          "name": "moonmc:alien_spawn_egg",
           "weight": 2
         }
       ]

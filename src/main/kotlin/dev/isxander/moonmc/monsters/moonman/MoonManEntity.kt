@@ -1,4 +1,4 @@
-package dev.isxander.moonmc.monsters
+package dev.isxander.moonmc.monsters.moonman
 
 import dev.isxander.moonmc.registry.MoonRegistry
 import net.minecraft.entity.EntityType

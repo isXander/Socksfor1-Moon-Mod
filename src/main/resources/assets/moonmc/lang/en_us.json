@@ -9,6 +9,7 @@
   "item.moonmc.laser_bazooka": "Laser Bazooka",
   "item.moonmc.moon_rock": "Moon Rock",
   "item.moonmc.moon_man_spawn_egg": "Moon Man Spawn Egg",
+  "item.moonmc.alien_spawn_egg": "Alien Spawn Egg",
   "item.moonmc.blue_asteroid_shard": "Blue Asteroid Shard",
   "item.moonmc.red_asteroid_shard": "Red Asteroid Shard",
   "item.moonmc.yellow_asteroid_shard": "Yellow Asteroid Shard",
@@ -18,6 +19,7 @@
   "entity.moonmc.pistol_bullet": "Pistol Bullet",
   "entity.moonmc.moon_rock": "Moon Rock",
   "entity.moonmc.moon_man": "Moon Man",
+  "entity.moonmc.alien": "Alien",
   "death.attack.ranOutOfOxygen": "%1$s slowly died due to lack of oxygen.",
   "death.attack.ranOutOfOxygen.player": "%1$s slowly died due to lack of oxygen."
 }

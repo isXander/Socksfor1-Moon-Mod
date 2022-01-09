@@ -1,6 +1,6 @@
-package dev.isxander.moonmc.monsters.model
+package dev.isxander.moonmc.monsters.moonman.model
 
-import dev.isxander.moonmc.monsters.MoonManEntity
+import dev.isxander.moonmc.monsters.moonman.MoonManEntity
 import net.minecraft.client.model.ModelPart
 import net.minecraft.client.render.entity.model.BipedEntityModel
 

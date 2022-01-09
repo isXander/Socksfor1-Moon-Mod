@@ -2,7 +2,8 @@ package dev.isxander.moonmc.registry
 
 import dev.isxander.moonmc.disasters.asteroid.AsteroidEntity
 import dev.isxander.moonmc.food.AsteroidShardItem
-import dev.isxander.moonmc.monsters.MoonManEntity
+import dev.isxander.moonmc.monsters.alien.AlienEntity
+import dev.isxander.moonmc.monsters.moonman.MoonManEntity
 import dev.isxander.moonmc.oxygen.OxygenMask
 import dev.isxander.moonmc.transport.rocket.RocketEntity
 import dev.isxander.moonmc.transport.rocket.RocketItem
@@ -21,7 +22,6 @@ import dev.isxander.moonmc.weapons.ranged.sniper.LaserSniperItem
 import dev.isxander.moonmc.weapons.ranged.sniper.SniperBulletEntity
 import io.ejekta.kambrik.registration.KambrikAutoRegistrar
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.fabricmc.fabric.api.biome.v1.BiomeModification
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -31,14 +31,12 @@ import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.entity.mob.HostileEntity
-import net.minecraft.entity.passive.PigEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.Heightmap
-import net.minecraft.world.SpawnHelper
 import net.minecraft.world.biome.Biome
 
 object MoonRegistry : KambrikAutoRegistrar {
@@ -133,6 +131,15 @@ object MoonRegistry : KambrikAutoRegistrar {
         dimensions(EntityDimensions.fixed(3f, 7.5f))
     }.build()
     val ROCKET_ITEM = "rocket" forItem RocketItem()
+
+    val ALIEN_ENTITY = "alien" forEntityType FabricEntityTypeBuilder.createLiving<AlienEntity>().apply {
+        entityFactory(::AlienEntity)
+        spawnGroup(SpawnGroup.MONSTER)
+        trackRangeChunks(8)
+        defaultAttributes(AlienEntity::createAlienAttributes)
+        dimensions(EntityDimensions.fixed(1.2f, 3f))
+    }.build()
+    val ALIEN_SPAWN_EGG_ITEM = "alien_spawn_egg" forItem SpawnEggItem(ALIEN_ENTITY, 0x303030, 0x414141, FabricItemSettings().group(MOON_ITEM_GROUP))
 
     override fun afterRegistration() {
         Registry.register(Registry.PARTICLE_TYPE, Identifier("moonmc", "laser_particle"), LASER_PARTICLE)

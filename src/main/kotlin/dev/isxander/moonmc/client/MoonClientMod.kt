@@ -1,9 +1,8 @@
 package dev.isxander.moonmc.client
 
 import dev.isxander.moonmc.disasters.asteroid.render.AsteroidRenderer
-import dev.isxander.moonmc.monsters.render.MoonManEntityRenderer
-import dev.isxander.moonmc.oxygen.MAX_OXYGEN
-import dev.isxander.moonmc.oxygen.oxygen
+import dev.isxander.moonmc.monsters.alien.render.AlienEntityRenderer
+import dev.isxander.moonmc.monsters.moonman.render.MoonManEntityRenderer
 import dev.isxander.moonmc.oxygen.render.OxygenMaskRenderer
 import dev.isxander.moonmc.registry.MoonRegistry
 import dev.isxander.moonmc.transport.rocket.render.RocketEntityRenderer
@@ -13,14 +12,10 @@ import dev.isxander.moonmc.utils.EntitySpawnPacket.PacketBufUtil.readAngle
 import dev.isxander.moonmc.utils.EntitySpawnPacket.PacketBufUtil.readVec3d
 import dev.isxander.moonmc.utils.mc
 import dev.isxander.moonmc.weapons.ranged.ParticleBullet
-import io.ejekta.kambrik.Kambrik
-import io.ejekta.kambrik.command.addCommand
 import net.fabricmc.api.ClientModInitializer
-import net.fabricmc.fabric.api.`object`.builder.v1.client.model.FabricModelPredicateProviderRegistry
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback
 import net.minecraft.client.particle.DamageParticle
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer
@@ -43,6 +38,7 @@ object MoonClientMod : ClientModInitializer {
         EntityRendererRegistry.register(MoonRegistry.MOON_MAN_ENTITY, ::MoonManEntityRenderer)
         EntityRendererRegistry.register(MoonRegistry.ASTEROID_ENTITY, ::AsteroidRenderer)
         EntityRendererRegistry.register(MoonRegistry.ROCKET_ENTITY, ::RocketEntityRenderer)
+        EntityRendererRegistry.register(MoonRegistry.ALIEN_ENTITY, ::AlienEntityRenderer)
         GeoItemRenderer.registerItemRenderer(MoonRegistry.ROCKET_ITEM, RocketItemRenderer())
         GeoArmorRenderer.registerArmorRenderer<Entity>(OxygenMaskRenderer(), MoonRegistry.OXYGEN_MASK)
 
