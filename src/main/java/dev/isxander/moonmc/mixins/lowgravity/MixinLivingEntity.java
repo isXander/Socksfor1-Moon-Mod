@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class MixinLivingEntity extends MixinEntity {
+public abstract class MixinLivingEntity {
     /**
      * adjusts the gravity of the entity
      */

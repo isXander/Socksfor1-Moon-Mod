@@ -6,7 +6,6 @@ import dev.isxander.moonmc.oxygen.MAX_OXYGEN
 import dev.isxander.moonmc.oxygen.oxygen
 import dev.isxander.moonmc.packets.server.sendOxygenPacket
 import dev.isxander.moonmc.registry.MoonRegistry
-import dev.isxander.moonmc.utils.mc
 import io.ejekta.kambrik.command.addCommand
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
@@ -30,14 +29,15 @@ object MoonMod : ModInitializer {
     }
 
     private fun registerCommands() {
-        CommandRegistrationCallback.EVENT.register { dispatcher, dedicated ->
+        CommandRegistrationCallback.EVENT.register { dispatcher, _ ->
             dispatcher.addCommand("moonmc") {
                 "set_oxygen" {
                     argInt("level", 0..MAX_OXYGEN) { oxygen ->
                         runs {
                             source.player?.oxygen = oxygen()
 
-                            for (player in source.world?.players ?: emptyList()) sendOxygenPacket(player, source.player, source.player.oxygen)
+                            for (player in source.world?.players ?: emptyList())
+                                sendOxygenPacket(player, source.player, source.player.oxygen)
                         }
                     }
                 }
