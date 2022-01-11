@@ -2,6 +2,7 @@ package dev.isxander.moonmc.registry
 
 import dev.isxander.moonmc.disasters.asteroid.AsteroidEntity
 import dev.isxander.moonmc.food.AsteroidShardItem
+import dev.isxander.moonmc.material.AlienArmourMaterial
 import dev.isxander.moonmc.monsters.alien.AlienEntity
 import dev.isxander.moonmc.monsters.moonman.MoonManEntity
 import dev.isxander.moonmc.oxygen.OxygenMask
@@ -28,9 +29,12 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes
 import net.fabricmc.fabric.mixin.`object`.builder.SpawnRestrictionAccessor
 import net.minecraft.entity.EntityDimensions
+import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.SpawnGroup
 import net.minecraft.entity.SpawnRestriction
 import net.minecraft.entity.mob.HostileEntity
+import net.minecraft.item.ArmorItem
+import net.minecraft.item.ArmorMaterials
 import net.minecraft.item.ItemStack
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.sound.SoundEvent
@@ -48,6 +52,8 @@ object MoonRegistry : KambrikAutoRegistrar {
     val OXYGEN_MASK = "oxygen_mask" forItem OxygenMask()
 
     val LASER_SWORD = "laser_sword" forItem LaserSwordItem()
+    val LASER_SWORD_AMBIENT_SOUND = "item.laser_sword.ambient" forSoundEvent SoundEvent(Identifier("moonmc", "item.laser_sword.ambient"))
+    val LASER_SWORD_WAVE_SOUND = "item.laser_sword.wave" forSoundEvent SoundEvent(Identifier("moonmc", "item.laser_sword.wave"))
 
     val LASER_SHOTGUN = "laser_shotgun" forItem LaserShotgunItem()
     val SHOTGUN_SHELL = "shotgun_shell" forEntityType FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::ShotgunShellEntity).apply {
@@ -140,6 +146,11 @@ object MoonRegistry : KambrikAutoRegistrar {
         dimensions(EntityDimensions.fixed(1.2f, 3f))
     }.build()
     val ALIEN_SPAWN_EGG_ITEM = "alien_spawn_egg" forItem SpawnEggItem(ALIEN_ENTITY, 0x303030, 0x414141, FabricItemSettings().group(MOON_ITEM_GROUP))
+
+    val ALIEN_ARMOUR_HELMET_ITEM = "alien_helmet" forItem ArmorItem(AlienArmourMaterial, EquipmentSlot.HEAD, FabricItemSettings().group(MOON_ITEM_GROUP))
+    val ALIEN_ARMOUR_CHESTPLATE_ITEM = "alien_chestplate" forItem ArmorItem(AlienArmourMaterial, EquipmentSlot.CHEST, FabricItemSettings().group(MOON_ITEM_GROUP))
+    val ALIEN_ARMOUR_LEGGINGS_ITEM = "alien_leggings" forItem ArmorItem(AlienArmourMaterial, EquipmentSlot.LEGS, FabricItemSettings().group(MOON_ITEM_GROUP))
+    val ALIEN_ARMOUR_BOOTS_ITEM = "alien_boots" forItem ArmorItem(AlienArmourMaterial, EquipmentSlot.FEET, FabricItemSettings().group(MOON_ITEM_GROUP))
 
     override fun afterRegistration() {
         Registry.register(Registry.PARTICLE_TYPE, Identifier("moonmc", "laser_particle"), LASER_PARTICLE)

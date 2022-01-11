@@ -18,8 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinLivingEntity implements LivingEntityOxygenAccess {
     @Shadow public abstract boolean isAlive();
 
-    @Shadow public abstract void equipStack(EquipmentSlot var1, ItemStack var2);
-
     private int oxygen = LivingEntityExtKt.MAX_OXYGEN;
 
     @Override public int getOxygen() { return oxygen; }

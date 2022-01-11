@@ -4,14 +4,12 @@ import dev.isxander.moonmc.disasters.asteroid.AsteroidEntity
 import dev.isxander.moonmc.events.ServerTickChunkCallback
 import dev.isxander.moonmc.oxygen.MAX_OXYGEN
 import dev.isxander.moonmc.oxygen.oxygen
+import dev.isxander.moonmc.packets.server.sendOxygenPacket
 import dev.isxander.moonmc.registry.MoonRegistry
 import dev.isxander.moonmc.utils.mc
 import io.ejekta.kambrik.command.addCommand
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
-import net.fabricmc.fabric.mixin.`object`.builder.SpawnRestrictionAccessor
 import net.minecraft.util.ActionResult
 import software.bernie.example.GeckoLibMod
 import software.bernie.geckolib3.GeckoLib
@@ -35,9 +33,11 @@ object MoonMod : ModInitializer {
         CommandRegistrationCallback.EVENT.register { dispatcher, dedicated ->
             dispatcher.addCommand("moonmc") {
                 "set_oxygen" {
-                    argInt("level", 0..MAX_OXYGEN) {
+                    argInt("level", 0..MAX_OXYGEN) { oxygen ->
                         runs {
-                            mc.player!!.oxygen = argFrom(arg)
+                            source.player?.oxygen = oxygen()
+
+                            for (player in source.world?.players ?: emptyList()) sendOxygenPacket(player, source.player, source.player.oxygen)
                         }
                     }
                 }

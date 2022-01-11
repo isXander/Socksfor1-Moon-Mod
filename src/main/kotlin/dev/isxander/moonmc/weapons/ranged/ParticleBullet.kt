@@ -3,8 +3,6 @@ package dev.isxander.moonmc.weapons.ranged
 import dev.isxander.moonmc.registry.MoonRegistry
 import dev.isxander.moonmc.utils.mc
 import net.minecraft.advancement.criterion.Criteria
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
 import net.minecraft.client.particle.BlockDustParticle
 import net.minecraft.client.render.VertexConsumerProvider
 import net.minecraft.client.render.entity.EntityRenderer
@@ -21,13 +19,11 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.PersistentProjectileEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket
-import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.hit.EntityHitResult
-import net.minecraft.util.hit.HitResult
 import net.minecraft.world.World
 import kotlin.random.Random
 
@@ -50,10 +46,9 @@ abstract class ParticleBullet(type: EntityType<out ParticleBullet>, world: World
         spawnParticles()
     }
 
-    override fun onEntityHit(entityHitResult: EntityHitResult?) {
+    override fun onEntityHit(entityHitResult: EntityHitResult) {
         val l: DamageSource
-        super.onEntityHit(entityHitResult)
-        val entity = entityHitResult!!.entity
+        val entity = entityHitResult.entity
 
         if (owner == null) {
             l = BulletDamageSource(this, this)
@@ -63,21 +58,19 @@ abstract class ParticleBullet(type: EntityType<out ParticleBullet>, world: World
                 (owner as LivingEntity).onAttacking(entity)
             }
         }
-        val enderman = entity.type === EntityType.ENDERMAN
+        val targetInvulnerable = entity.type === EntityType.ENDERMAN || entity.type === MoonRegistry.ALIEN_ENTITY
 
-        if (this.isOnFire && !enderman) {
+        if (this.isOnFire && !targetInvulnerable) {
             entity.setOnFireFor(5)
         }
 
-        if (entity.damage(l, damage.toFloat() / 5f)) {
-            if (enderman) {
+        discard()
+
+        if (entity.damage(l, damage.toFloat())) {
+            if (targetInvulnerable) {
                 return
             }
             if (entity is LivingEntity) {
-                if (!world.isClient && this.pierceLevel <= 0) {
-                    entity.stuckArrowCount = entity.stuckArrowCount + 1
-                }
-
                 val velocity = velocity.multiply(1.0, 0.0, 1.0).normalize().multiply(punch.toDouble() * 0.6)
                 if (punch > 0) {
                     if (velocity.lengthSquared() > 0.0) {
@@ -105,9 +98,6 @@ abstract class ParticleBullet(type: EntityType<out ParticleBullet>, world: World
                 }
             }
             playSound(sound, 1.0f, 1.2f / (random.nextFloat() * 0.2f + 0.9f))
-            if (this.pierceLevel <= 0) {
-                discard()
-            }
         } else {
             velocity = velocity.multiply(-0.1)
             yaw += 180.0f
@@ -116,7 +106,6 @@ abstract class ParticleBullet(type: EntityType<out ParticleBullet>, world: World
                 if (pickupType == PickupPermission.ALLOWED) {
                     this.dropStack(asItemStack(), 0.1f)
                 }
-                discard()
             }
         }
     }

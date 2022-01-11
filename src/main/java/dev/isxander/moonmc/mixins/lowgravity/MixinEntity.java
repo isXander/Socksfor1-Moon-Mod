@@ -66,7 +66,10 @@ public abstract class MixinEntity {
 
     @Shadow public abstract Vec3d getVelocity();
 
-    @ModifyVariable(method = "fall", at = @At("HEAD"))
+    /**
+     * Make the fall damage relate to the gravity modifier.
+     */
+    @ModifyVariable(method = "fall", at = @At("HEAD"), argsOnly = true)
     public double modifyFallDistance(double heightDifference) {
         return heightDifference * MoonMod.gravityMultiplier;
     }

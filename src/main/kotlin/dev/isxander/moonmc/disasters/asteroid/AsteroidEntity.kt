@@ -56,7 +56,7 @@ class AsteroidEntity(type: EntityType<out AsteroidEntity>, world: World) : Explo
             val chestPos = getChestPosition(blockPos)
             world.setBlockState(chestPos, Blocks.CHEST.defaultState)
             val chest = world.getBlockEntity(chestPos) as? ChestBlockEntity
-            chest!!.setLootTable(Identifier("moonmc", "asteroid_chest"), world.random.nextLong())
+            chest!!.setLootTable(Identifier("moonmc", "chest/asteroid"), world.random.nextLong())
 
             repeat(random.nextInt(10, 21)) {
                 val itemPos = getRandomPointInRadius(x.toFloat(), z.toFloat(), explosionPower / 4f, random)

@@ -10,6 +10,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerWorld.class)
 public class MixinServerWorld {
+    /**
+     * Used for randomly spawning in effects like lightning,
+     * or in this case, asteroids
+     *
+     * @see ServerTickChunkCallback
+     */
     @Inject(method = "tickChunk", at = @At("HEAD"))
     public void onTickChunk(WorldChunk chunk, int randomTickSpeed, CallbackInfo ci) {
         ServerTickChunkCallback.getEVENT().invoker().onTick((ServerWorld) (Object) this, chunk, randomTickSpeed);

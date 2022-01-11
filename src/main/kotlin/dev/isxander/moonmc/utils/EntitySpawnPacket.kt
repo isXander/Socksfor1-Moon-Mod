@@ -13,7 +13,7 @@ import net.minecraft.util.registry.Registry
 object EntitySpawnPacket {
     val packetId = Identifier("moonmc", "spawn_packet")
 
-    fun create(e: Entity, packetID: Identifier?): Packet<*> {
+    fun create(e: Entity): Packet<*> {
         check(!e.world.isClient) { "SpawnPacketUtil.create called on the logical client!" }
         val byteBuf = PacketByteBuf(Unpooled.buffer())
         byteBuf.writeVarInt(Registry.ENTITY_TYPE.getRawId(e.type))
@@ -22,7 +22,7 @@ object EntitySpawnPacket {
         PacketBufUtil.writeVec3d(byteBuf, e.pos)
         PacketBufUtil.writeAngle(byteBuf, e.pitch)
         PacketBufUtil.writeAngle(byteBuf, e.yaw)
-        return ServerPlayNetworking.createS2CPacket(packetID, byteBuf)
+        return ServerPlayNetworking.createS2CPacket(packetId, byteBuf)
     }
 
     object PacketBufUtil {

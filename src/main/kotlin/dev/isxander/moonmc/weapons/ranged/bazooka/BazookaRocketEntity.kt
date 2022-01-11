@@ -16,7 +16,7 @@ class BazookaRocketEntity(type: EntityType<out BazookaRocketEntity>, world: Worl
     override val strengthModifier = 1.0
 
     init {
-        damage = 0.5
+        damage = 25.0
     }
 
     override fun spawnParticles() {
@@ -35,14 +35,14 @@ class BazookaRocketEntity(type: EntityType<out BazookaRocketEntity>, world: Worl
         world.createExplosion(this, x, y, z, 2f, grief, if (grief) Explosion.DestructionType.DESTROY else Explosion.DestructionType.NONE)
     }
 
-    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this, EntitySpawnPacket.packetId)
+    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this)
 
     companion object {
-        fun createAndSpawn(world: World, entity: LivingEntity, speedMultiplier: Float, playSound: Boolean = true): Boolean {
+        fun createAndSpawn(world: World, entity: LivingEntity, speedMultiplier: Float, aiming: Boolean, playSound: Boolean = true): Boolean {
             val shell = MoonRegistry.BAZOOKA_ROCKET.create(world) ?: return false
             shell.setPosition(entity.x, entity.eyeY, entity.z)
             shell.owner = entity
-            shell.setVelocity(entity, entity.pitch, entity.yaw, 0.0f, 3f * speedMultiplier, 1f)
+            shell.setVelocity(entity, entity.pitch, entity.yaw, 0.0f, 3f * speedMultiplier, if (aiming) 1f else 6f)
             return world.spawnEntity(shell).also {
                 if (it && playSound) {
                     playBulletSound(world, entity.x, entity.eyeY, entity.z, 2f, 0.5f, 0.2f)

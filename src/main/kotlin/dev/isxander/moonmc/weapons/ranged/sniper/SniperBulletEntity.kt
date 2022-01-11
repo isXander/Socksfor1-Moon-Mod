@@ -22,7 +22,7 @@ class SniperBulletEntity(type: EntityType<out SniperBulletEntity>, world: World)
         }
     }
 
-    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this, EntitySpawnPacket.packetId)
+    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this)
 
     companion object {
         fun createAndSpawn(world: World, entity: LivingEntity, speedMultiplier: Float, aiming: Boolean, playSound: Boolean = true): Boolean {

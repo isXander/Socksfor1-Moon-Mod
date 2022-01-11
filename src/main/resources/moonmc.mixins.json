@@ -7,6 +7,8 @@
   },
   "mixins": [
     "events.MixinServerWorld",
+    "guns.damage.MixinLivingEntity",
+    "guns.knockback.MixinLivingEntity",
     "lowgravity.AccessorEntity",
     "lowgravity.MixinEntity",
     "lowgravity.MixinLivingEntity",
@@ -20,14 +22,19 @@
     "nowater.MixinAquiferSamplerImpl",
     "nowater.MixinWorld",
     "oxygen.MixinLivingEntity",
-    "oxygen.MixinMobEntity"
+    "oxygen.MixinMobEntity",
+    "rocket.antikick.MixinServerPlayNetworkHandler",
+    "utils.MixinLivingEntity"
   ],
   "client": [
+    "guns.ads.MixinAbstractClientPlayerEntity",
+    "guns.ads.MixinInGameHud",
+    "guns.ads.MixinMouse",
     "noclouds.MixinGameOptions",
     "oxygen.MixinInGameHud",
     "rocket.input.MixinClientPlayerEntity",
     "rocket.input.MixinEntity",
     "rocket.perspective.MixinClientPlayerEntity",
-    "rocket.perspective.MixinMinecraftClient"
+    "rocket.perspective.MixinMinecraftClient",
   ]
 }

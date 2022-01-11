@@ -17,7 +17,7 @@ class MoonRockEntity(type: EntityType<out MoonRockEntity>, world: World) : Throw
     override fun onEntityHit(entityHitResult: EntityHitResult) {
         super.onEntityHit(entityHitResult)
         val entity = entityHitResult.entity
-        entity.damage(DamageSource.thrownProjectile(this, owner), 10f)
+        entity.damage(DamageSource.thrownProjectile(this, owner), 5f)
     }
 
     override fun onCollision(hitResult: HitResult) {
@@ -28,5 +28,5 @@ class MoonRockEntity(type: EntityType<out MoonRockEntity>, world: World) : Throw
         }
     }
 
-    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this, EntitySpawnPacket.packetId)
+    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this)
 }

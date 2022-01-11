@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "moonmc:alien_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "moonmc:alien_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "moonmc:alien_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "moonmc:alien_helmet"
+        }
+      ]
+    }
+  ]
+}

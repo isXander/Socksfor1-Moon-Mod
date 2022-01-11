@@ -15,7 +15,7 @@ import kotlin.math.sqrt
 
 class MoonManEntity(type: EntityType<out MoonManEntity>, world: World) : HostileEntity(type, world), RangedAttackMob {
     override fun initGoals() {
-        this.goalSelector.add(1, ProjectileAttackGoal(this, 1.0, 20, 15f))
+        this.goalSelector.add(1, ProjectileAttackGoal(this, 1.0, 30, 15f))
         this.goalSelector.add(2, WanderAroundFarGoal(this, 1.0))
         this.goalSelector.add(3, LookAtEntityGoal(this, PlayerEntity::class.java, 10f))
         this.goalSelector.add(4, LookAroundGoal(this))

@@ -22,14 +22,14 @@ class RifleBulletEntity(type: EntityType<out RifleBulletEntity>, world: World) :
         }
     }
 
-    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this, EntitySpawnPacket.packetId)
+    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this)
 
     companion object {
-        fun createAndSpawn(world: World, entity: LivingEntity, speedMultiplier: Float, playSound: Boolean = true): Boolean {
+        fun createAndSpawn(world: World, entity: LivingEntity, speedMultiplier: Float, aiming: Boolean, playSound: Boolean = true): Boolean {
             val shell = MoonRegistry.RIFLE_BULLET.create(world) ?: return false
             shell.setPosition(entity.x, entity.eyeY, entity.z)
             shell.owner = entity
-            shell.setVelocity(entity, entity.pitch, entity.yaw, 0.0f, 2f * speedMultiplier, .5f)
+            shell.setVelocity(entity, entity.pitch, entity.yaw, 0.0f, 2f * speedMultiplier, if (aiming) .5f else 2f)
             return world.spawnEntity(shell).also {
                 if (it && playSound) {
                     playBulletSound(world, entity.x, entity.eyeY, entity.z)

@@ -4,6 +4,8 @@ import dev.isxander.moonmc.disasters.asteroid.render.AsteroidRenderer
 import dev.isxander.moonmc.monsters.alien.render.AlienEntityRenderer
 import dev.isxander.moonmc.monsters.moonman.render.MoonManEntityRenderer
 import dev.isxander.moonmc.oxygen.render.OxygenMaskRenderer
+import dev.isxander.moonmc.packets.client.receiveEntityPacket
+import dev.isxander.moonmc.packets.client.receiveOxygenPacket
 import dev.isxander.moonmc.registry.MoonRegistry
 import dev.isxander.moonmc.transport.rocket.render.RocketEntityRenderer
 import dev.isxander.moonmc.transport.rocket.render.RocketItemRenderer
@@ -42,7 +44,7 @@ object MoonClientMod : ClientModInitializer {
         GeoItemRenderer.registerItemRenderer(MoonRegistry.ROCKET_ITEM, RocketItemRenderer())
         GeoArmorRenderer.registerArmorRenderer<Entity>(OxygenMaskRenderer(), MoonRegistry.OXYGEN_MASK)
 
-        receiveEntityPacket()
+        receivePackets()
         registerParticles()
     }
 
@@ -53,30 +55,8 @@ object MoonClientMod : ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(MoonRegistry.LASER_PARTICLE, DamageParticle::Factory)
     }
 
-    private fun receiveEntityPacket() {
-        ClientPlayNetworking.registerGlobalReceiver(EntitySpawnPacket.packetId) { client, handler, buf, response ->
-            val et: EntityType<*> = Registry.ENTITY_TYPE.get(buf.readVarInt())
-            val uuid = buf.readUuid()
-            val entityId = buf.readVarInt()
-            val pos = readVec3d(buf)
-            val pitch = readAngle(buf)
-            val yaw = readAngle(buf)
-            client.execute {
-                checkNotNull(mc.world) { "Tried to spawn entity in a null world!" }
-                val e = et.create(mc.world)
-                    ?: error(
-                        "Failed to create instance of entity \"" + Registry.ENTITY_TYPE.getId(
-                            et
-                        ).toString() + "\"!"
-                    )
-                e.updateTrackedPosition(pos)
-                e.setPos(pos.x, pos.y, pos.z)
-                e.pitch = pitch
-                e.yaw = yaw
-                e.id = entityId
-                e.uuid = uuid
-                mc.world!!.addEntity(entityId, e)
-            }
-        }
+    private fun receivePackets() {
+        receiveEntityPacket()
+        receiveOxygenPacket()
     }
 }

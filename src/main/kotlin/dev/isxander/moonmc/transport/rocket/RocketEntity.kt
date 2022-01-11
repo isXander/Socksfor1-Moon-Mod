@@ -106,7 +106,7 @@ class RocketEntity(type: EntityType<out RocketEntity>, world: World) : Entity(ty
     override fun initDataTracker() {}
     override fun readCustomDataFromNbt(nbt: NbtCompound) {}
     override fun writeCustomDataToNbt(nbt: NbtCompound) {}
-    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this, EntitySpawnPacket.packetId)
+    override fun createSpawnPacket(): Packet<*> = EntitySpawnPacket.create(this)
 
     companion object {
         @JvmStatic

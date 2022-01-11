@@ -1,7 +1,8 @@
 package dev.isxander.moonmc.weapons.ranged.rifle
 
 import dev.isxander.moonmc.registry.MoonRegistry
-import dev.isxander.moonmc.weapons.material.LaserMaterial
+import dev.isxander.moonmc.material.LaserMaterial
+import dev.isxander.moonmc.weapons.ranged.IGun
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
@@ -12,9 +13,12 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 import java.util.function.Predicate
 
-class LaserRifleItem : RangedWeaponItem(FabricItemSettings().group(MoonRegistry.MOON_ITEM_GROUP).maxDamage(LaserMaterial.durability)) {
+class LaserRifleItem : RangedWeaponItem(FabricItemSettings().group(MoonRegistry.MOON_ITEM_GROUP).maxDamage(LaserMaterial.durability)), IGun {
+    override val adsZoom = 0.95f
+    override val adsSensitivity = 0.8f
+
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-        if (RifleBulletEntity.createAndSpawn(world, user, 1f, true)) {
+        if (RifleBulletEntity.createAndSpawn(world, user, 1f, hand == Hand.OFF_HAND, true)) {
             user.itemCooldownManager.set(this, 1)
             user.activeItem.damage(1, user) { it.sendToolBreakStatus(hand) }
         }

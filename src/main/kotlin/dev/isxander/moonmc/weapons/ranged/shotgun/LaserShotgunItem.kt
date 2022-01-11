@@ -1,7 +1,8 @@
 package dev.isxander.moonmc.weapons.ranged.shotgun
 
 import dev.isxander.moonmc.registry.MoonRegistry
-import dev.isxander.moonmc.weapons.material.LaserMaterial
+import dev.isxander.moonmc.material.LaserMaterial
+import dev.isxander.moonmc.weapons.ranged.IGun
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -13,9 +14,13 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 import java.util.function.Predicate
 
-class LaserShotgunItem : RangedWeaponItem(FabricItemSettings().group(MoonRegistry.MOON_ITEM_GROUP).maxDamage(LaserMaterial.durability)) {
+class LaserShotgunItem : RangedWeaponItem(FabricItemSettings().group(MoonRegistry.MOON_ITEM_GROUP).maxDamage(
+    LaserMaterial.durability)), IGun {
+    override val adsZoom = 0.95f
+    override val adsSensitivity = 0.8f
+
     override fun onStoppedUsing(stack: ItemStack, world: World, user: LivingEntity, remainingUseTicks: Int) {
-        if (ShotgunShellEntity.createAndSpawn(world, user, 1f, true)) {
+        if (ShotgunShellEntity.createAndSpawn(world, user, 1f, user.activeHand == Hand.OFF_HAND, true)) {
             (user as? PlayerEntity)?.itemCooldownManager?.set(this, 20)
             user.activeItem.damage(1, user) { it.sendToolBreakStatus(user.activeHand) }
         }
