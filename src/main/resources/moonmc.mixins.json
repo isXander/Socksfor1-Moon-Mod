@@ -10,6 +10,7 @@
     "guns.damage.MixinLivingEntity",
     "guns.knockback.MixinLivingEntity",
     "lowgravity.AccessorEntity",
+    "lowgravity.MixinEntity",
     "lowgravity.MixinLivingEntity",
     "moonlight.AccessorBooleanRule",
     "moonlight.MixinDimensionType",
@@ -34,6 +35,6 @@
     "rocket.input.MixinClientPlayerEntity",
     "rocket.input.MixinEntity",
     "rocket.perspective.MixinClientPlayerEntity",
-    "rocket.perspective.MixinMinecraftClient",
+    "rocket.perspective.MixinMinecraftClient"
   ]
 }
