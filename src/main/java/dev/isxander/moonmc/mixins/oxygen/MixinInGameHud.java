@@ -1,6 +1,6 @@
 package dev.isxander.moonmc.mixins.oxygen;
 
-import dev.isxander.moonmc.oxygen.LivingEntityExtKt;
+import dev.isxander.moonmc.oxygen.EntityOxygenUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -29,8 +29,8 @@ public abstract class MixinInGameHud extends DrawableHelper {
         int maxAir = playerEntity.getMaxAir();
         int currentAir = playerEntity.getAir();
 
-        int maxOxygen = LivingEntityExtKt.MAX_OXYGEN;
-        int currentOxygen = LivingEntityExtKt.getOxygen(playerEntity);
+        int maxOxygen = EntityOxygenUtils.MAX_OXYGEN;
+        int currentOxygen = EntityOxygenUtils.getOxygen(playerEntity);
 
         int o2Percent = currentOxygen / maxOxygen;
         int airPercent = currentAir / maxAir;
@@ -46,7 +46,7 @@ public abstract class MixinInGameHud extends DrawableHelper {
             current = currentOxygen;
         }
 
-        if (current < max || playerEntity.isSubmergedInWater() || !LivingEntityExtKt.isWearingOxygenMask(playerEntity)) {
+        if (current < max || playerEntity.isSubmergedInWater() || !EntityOxygenUtils.isWearingOxygenMask(playerEntity)) {
             int ab = MathHelper.ceil((double)(current - 2) * 10.0 / (double)max);
             int ac = MathHelper.ceil((double)current * 10.0 / (double)max) - ab;
 
