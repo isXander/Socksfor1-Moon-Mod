@@ -86,7 +86,6 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
         p0.addAnimationController(AnimationController(this, "action", 10f) { event ->
             when (state) {
                 attackingState -> {
-                    println("attacking animation")
                     event.controller.setAnimation(AnimationBuilder().addAnimation("attack"))
                     PlayState.CONTINUE
                 }
@@ -95,7 +94,6 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
                     PlayState.CONTINUE
                 }
                 else -> {
-                    println("no animation")
                     PlayState.STOP
                 }
             }
@@ -106,13 +104,11 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
     class AlienAttackGoal(private val alien: AlienEntity) : MeleeAttackGoal(alien, 1.0, true) {
         override fun start() {
             super.start()
-            println("starting!!")
             alien.state = -1
         }
 
         override fun stop() {
             super.stop()
-            println("stopping!")
             alien.state = -1
         }
 
@@ -123,9 +119,7 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
                 alien.swingHand(Hand.MAIN_HAND)
                 alien.tryAttack(target)
                 alien.state = alien.attackingState
-                println("attacking!")
             } else if (cooldown == 1) {
-                println("cooldown alert!")
                 alien.state = -1
             }
         }
