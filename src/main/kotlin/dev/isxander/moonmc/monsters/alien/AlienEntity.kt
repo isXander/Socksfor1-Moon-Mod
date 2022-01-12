@@ -24,6 +24,7 @@ import software.bernie.geckolib3.core.builder.AnimationBuilder
 import software.bernie.geckolib3.core.controller.AnimationController
 import software.bernie.geckolib3.core.manager.AnimationData
 import software.bernie.geckolib3.core.manager.AnimationFactory
+import kotlin.math.sqrt
 
 class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEntity(type, world), IAnimatable {
     override fun initGoals() {
@@ -69,8 +70,13 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
     override fun registerControllers(p0: AnimationData) {
         p0.addAnimationController(AnimationController(this, "passive", 20f) { event ->
             when {
+                !isOnGround ->
+                    event.controller.setAnimation(AnimationBuilder().addAnimation("jump"))
                 event.isMoving ->
-                    event.controller.setAnimation(AnimationBuilder().addAnimation("walk"))
+                    if (sqrt((x - prevX) * (x - prevX) + (z - prevZ) * (z - prevZ)) > 0.2)
+                        event.controller.setAnimation(AnimationBuilder().addAnimation("run"))
+                    else
+                        event.controller.setAnimation(AnimationBuilder().addAnimation("walk"))
                 else ->
                     event.controller.setAnimation(AnimationBuilder().addAnimation("idle"))
             }
@@ -80,6 +86,7 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
         p0.addAnimationController(AnimationController(this, "action", 10f) { event ->
             when (state) {
                 attackingState -> {
+                    println("attacking animation")
                     event.controller.setAnimation(AnimationBuilder().addAnimation("attack"))
                     PlayState.CONTINUE
                 }
@@ -87,7 +94,10 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
                     event.controller.setAnimation(AnimationBuilder().addAnimation("jump"))
                     PlayState.CONTINUE
                 }
-                else -> PlayState.STOP
+                else -> {
+                    println("no animation")
+                    PlayState.STOP
+                }
             }
         })
     }
@@ -96,11 +106,13 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
     class AlienAttackGoal(private val alien: AlienEntity) : MeleeAttackGoal(alien, 1.0, true) {
         override fun start() {
             super.start()
+            println("starting!!")
             alien.state = -1
         }
 
         override fun stop() {
             super.stop()
+            println("stopping!")
             alien.state = -1
         }
 
@@ -111,7 +123,9 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
                 alien.swingHand(Hand.MAIN_HAND)
                 alien.tryAttack(target)
                 alien.state = alien.attackingState
-            } else {
+                println("attacking!")
+            } else if (cooldown == 1) {
+                println("cooldown alert!")
                 alien.state = -1
             }
         }
