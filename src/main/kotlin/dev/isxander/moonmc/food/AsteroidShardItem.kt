@@ -13,7 +13,7 @@ import net.minecraft.world.World
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-class AsteroidShardItem : Item(FabricItemSettings().group(MoonRegistry.MOON_ITEM_GROUP).food(FoodComponent.Builder().alwaysEdible().build())) {
+class AsteroidShardItem : Item(FabricItemSettings().group(MoonRegistry.MOON_ITEM_GROUP).food(FoodComponent.Builder().alwaysEdible().hunger(3).build())) {
     private val effects = Registry.STATUS_EFFECT.entries
         .filter { !it.value.isInstant }
         .map { it.value }
@@ -21,7 +21,7 @@ class AsteroidShardItem : Item(FabricItemSettings().group(MoonRegistry.MOON_ITEM
     override fun finishUsing(stack: ItemStack, world: World, user: LivingEntity): ItemStack {
         if (!world.isClient) {
             val effect = effects.random()
-            val instance = StatusEffectInstance(effect, 1200, Random.nextInt(0, 3))
+            val instance = StatusEffectInstance(effect, 200, Random.nextInt(0, 3))
             (user as? PlayerEntity)?.itemCooldownManager?.set(this, 20)
             user.addStatusEffect(instance)
         }

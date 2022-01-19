@@ -25,5 +25,6 @@
   "entity.moonmc.moon_man": "Moon Man",
   "entity.moonmc.alien": "Alien",
   "death.attack.ranOutOfOxygen": "%1$s slowly died due to lack of oxygen.",
-  "death.attack.ranOutOfOxygen.player": "%1$s slowly died due to lack of oxygen."
+  "death.attack.ranOutOfOxygen.player": "%1$s slowly died due to lack of oxygen.",
+  "death.attack.bullet": "%1$s was shot by %2$s."
 }

@@ -132,7 +132,7 @@ class AlienEntity(type: EntityType<out AlienEntity>, world: World) : HostileEnti
             createHostileAttributes().apply {
                 add(EntityAttributes.GENERIC_FOLLOW_RANGE, 15.0)
                 add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5)
-                add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
+                add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10.0)
                 add(EntityAttributes.GENERIC_ARMOR, 5.0)
                 add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0)
             }

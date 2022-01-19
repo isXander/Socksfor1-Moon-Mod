@@ -63,11 +63,9 @@ class AsteroidEntity(type: EntityType<out AsteroidEntity>, world: World) : Explo
                 world.spawnEntity(ItemEntity(world, itemPos.x.toDouble(), y, itemPos.y.toDouble(), ItemStack(AsteroidShardItem.getRandomType())))
             }
 
-            if (random.nextInt(2) == 0) {
-                val alien = MoonRegistry.ALIEN_ENTITY.create(world)!!
-                alien.setPosition(pos)
-                world.spawnEntity(alien)
-            }
+            val alien = MoonRegistry.ALIEN_ENTITY.create(world)!!
+            alien.setPosition(pos)
+            world.spawnEntity(alien)
 
             discard()
         } else {

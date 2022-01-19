@@ -11,7 +11,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:diamond",
-          "weight": 4,
+          "weight": 8,
           "quality": 5,
           "functions": [
             {
@@ -28,7 +28,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:ender_pearl",
-          "weight": 10,
+          "weight": 20,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -44,7 +44,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:blaze_powder",
-          "weight": 8,
+          "weight": 16,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -60,7 +60,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:gold_ingot",
-          "weight": 20,
+          "weight": 40,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -76,7 +76,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_ingot",
-          "weight": 25,
+          "weight": 50,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -92,7 +92,7 @@
         {
           "type": "minecraft:item",
           "name": "moonmc:alien_spawn_egg",
-          "weight": 2
+          "weight": 4
         }
       ]
     },

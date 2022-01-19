@@ -12,7 +12,7 @@ class SniperBulletEntity(type: EntityType<out SniperBulletEntity>, world: World)
     override val strengthModifier = 0.99
 
     init {
-        damage = 25.0
+        damage = 17.0
     }
 
     override fun spawnParticles() {
